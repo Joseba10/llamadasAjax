@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+   <h1>Promesas</h1>
+
+    <script>
+
+        var frutas=[
+                    {
+                        "nombre": "banana",
+                        "precio": 3.15,
+                        "calorias": 500,
+                        "colores": [
+                            "amarillo",
+                            "negro"
+                        ],
+                        "oferta": true
+                           },
+                        {
+                            "nombre": "pera",
+                            "precio": 2,
+                            "calorias": 350,
+                            "colores": [
+                                "amarillo",
+                                "verde"
+                            ],
+                            "oferta": false
+                        },
+
+                        {
+                            "nombre": "fresa",
+                            "precio": 30.75,
+                            "calorias": 100,
+                            "colores": [
+                                "rosa",
+                                "roja"
+                            ],
+                            "oferta": true
+
+                        }
+
+                    ]
+
+function llamadaAjax(){
+
+    console.log('llamada ajax');
+    setTimeout(function(){
+        console.log('retorno Ajax');
+        return frutas;
+    },2000);
+
+
+        }
+
+    </script>
+
+
+</body>
+</html>

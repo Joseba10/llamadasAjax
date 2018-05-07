@@ -1,0 +1,16 @@
+<script>function get(method) {
+  var url = document.getElementById("datos").value;
+
+  fetch(url, {
+    method: method
+  }).then(function(response) {
+    response.json().then(function(object) {
+      console.log("¡Correcto!", object);
+    });
+  }).catch(function(error) {
+    console.error("!Hubo un error!", error);
+  });
+}</script>
+Introduzca URL de un servicio REST y pulse Enviar:<br />
+<input id="datos" type="text" value="https://api.github.com" size="33" />
+<input type="button" onclick="get('GET')" value="Enviar..." />

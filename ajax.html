@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax HTML</title>
+</head>
+<body>
+
+    <h1>AJAX html</h1>
+
+
+    <script src="ajax.js"></script>
+
+    <script>
+
+        let promesa=ajax('GET','http://localhost:8080/cancion');
+        //data es la variable que contiene los datos de promesa
+        promesa.then(canciones=>{ console.log(canciones) //Saca todas las canciones
+
+        let c2=canciones[1];
+        let p2= ajax ('GET',`http://localhost:8080/cancion/${c2.id}`);
+
+        p2.then(cancion2=>{
+            console.log(cancion2); //Saca la segunda cancion
+            const data={"nombre":"cambiar nombre"};
+            let pModificar = ajax('PUT',`http://localhost:8080/cancion/${cancion2.id}`,data)
+            pModificar.then(cModificada=> console.log('cancion modificada'));
+
+        });
+
+
+        }).catch(error=> console.warn(error));
+
+        //then Retorna un resolve o un reject
+
+
+        //Conseguir detalle de la 2 cancion por posicion
+
+
+
+
+       // promesa.then(data=> console.log()).catch(error=> console.warn(error));
+
+        //Modificar el nombre de la segunda cancion a testing
+
+        //Eliminar la segunda cancion
+
+
+        //Crear y mostrar una cancion con nombre Nice for what
+    </script>
+
+</body>
+</html>

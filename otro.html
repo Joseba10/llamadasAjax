@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+   <h1>ES6</h1>
+    <script>
+        //"use-strict"
+    console.log('yeeeah');
+
+    var frutas = ['pera','manzana','kiwi'];
+
+/*Esto es lo mismo que *******************
+
+        frutas.forEach(function(el){
+
+        console.log(el);
+    });*/
+
+/*Esto,que es la funcion Arrow*************/
+    /*
+        frutas.forEach(el=>{
+            console.log(el);
+        });
+
+        var miFuncion=(num,num2)=>num+num2;
+        console.log(miFuncion(5,3));
+        */
+
+//ES5
+        /*
+(function() {
+	console.log(x); // x no está definida aún.
+    if(true) {
+
+        Sigue teniendo ambito fuera del if,si lo pusieras con let no lo tendria
+    	var x = "hola mundo";
+
+       Si pones let la primera x no esta definida pero si vuelve ha apareder ocurre un fallo
+        let x="hola mundo";
+    }
+    console.log(x);
+    // Imprime "hola mundo", porque "var" hace que sea global
+    // a la función;
+})();
+        */
+
+        /*Destructuring
+        var obj = { nombre: "Carlos", apellido: "Azaustre" };
+var { nombre, apellido } = obj;
+console.log(nombre); // "Carlos"*/
+
+      var frutas=[
+                    {
+                        "nombre": "banana",
+                        "precio": 3.15,
+                        "calorias": 500,
+                        "colores": [
+                            "amarillo",
+                            "negro"
+                        ],
+                        "oferta": true
+	                   },
+
+	{
+		"nombre": "pera",
+		"precio": 2,
+		"calorias": 350,
+		"colores": [
+			"amarillo",
+			"verde"
+		],
+		"oferta": false
+	},
+
+	{
+		"nombre": "fresa",
+		"precio": 30.75,
+		"calorias": 100,
+		"colores": [
+			"rosa",
+			"roja"
+		],
+		"oferta": true
+
+	}
+
+
+]
+      //Suma el precio de todas las frutas
+      let totalFrutas=0;
+        frutas.forEach(frutas=>
+
+            totalFrutas+=frutas.precio);
+        console.log(`Total precio frutas ${totalFrutas}`);
+
+
+        /*Sacar el total de las frutas
+            let total= frutas.reduce(function(previous,current){
+            return previous.precio+ current.precio;
+            },0)*/
+
+       /* Esto es lo mismo que
+            let soloPrecios=frutas.map(function(f){
+            return f.precio
+            console.log(soloPrecios);
+        })*/
+
+        /*Esto*/
+            /*let soloPrecios=frutas.map(f=>f.precio).reduce((p,c)=>p+c);
+            console.log(soloPrecios);*/
+
+        /*Fruta en oferta*/
+
+    /*    let fruta_oferta= frutas.map(function(f){
+
+        if(f.oferta===true){
+            console.log(f.nombre);
+        }
+        })
+
+
+        Primera fruta en oferta
+         let primera_fruta_con_oferta= frutas.find(f=>f.oferta.find(c=> c=="true"))
+        console.log("primera fruta en oferta %o",primera_fruta_con_oferta)
+
+
+        Primera fruta de color verde
+
+        let fruta_verde= frutas.find(f=>f.colores.find(c=> c=="verde"))
+        console.log("primera fruta verde %o",fruta_verde)
+
+        */
+
+        //PROMESAS
+        /*function llamadaAjax(){
+
+
+            return new Promise(
+                resolve=>{
+
+                            setTimeout(function(){
+                            console.log('retorno Ajax');
+                            resolve(frutas);
+
+                       },3000);
+
+                    }//Resolve
+           )//Promise
+        }
+        let p1=llamadaAjax();
+        p1.then(el => console.log(el));
+        //let frutasJson= llamadaAjax();
+        //console.log(frutasJson);
+        */
+        function sumaAsincrona(a,b){
+
+            return new Promise(
+                resolve=>{
+
+                    if(a==-1){
+                       throw new Error('')
+                       }
+                    setTimeout(()=>resolve(a+b),200);
+            },
+            error=>{
+                reject("error valores invalidos");
+            }
+        )
+    }
+
+        let p2= sumaAsincrona(2,2);
+        let p3= sumaAsincrona(5,5);
+        let p4=sumaAsincrona(4,4);
+
+
+        //sumar p2+p3+p4
+
+       p2.then(v=> console.log(v)).catch(e=>console.error(e));
+       p3.then(v=> console.log(v));
+       p4.then(v=> console.log(v));
+
+        //Primera en terminar ejecuta then,el resto de promesas se ignora
+            Promise.race([p2,p3,p4]).then(values => console.log("race " + values));
+
+        //all espera a que se cumpla todas las promesas
+            Promise.all([p2,p3,p4]).then(values => console.log("all " + values));
+
+        async function sumaEsperando(){
+
+            const p12= await sumaAsincrona(6,6);
+            //Se espera 2 segundos hasta terminar p12
+            const p13= await sumaAsincrona(9,9);
+            //Se espera 2 segundos hasta terminar p13
+            const p14= await sumaAsincrona(5,5);
+            //Se espera 2 segundos hasta terminar p14
+
+            console.log("Sumatorio " + (p12+p13+p14));
+
+
+        }
+        sumaEsperando();
+
+    </script>
+</body>
+</html>
